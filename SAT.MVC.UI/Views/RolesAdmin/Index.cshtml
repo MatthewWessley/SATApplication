@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<Microsoft.AspNet.Identity.EntityFramework.IdentityRole>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Roles";
 }
 
-<h2>Index</h2>
+<h2><br />@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -12,7 +12,7 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.Name)
+            <strong>@Html.DisplayNameFor(model => model.Name)</strong>
         </th>
         <th>
 

@@ -1,10 +1,10 @@
 ﻿@model IEnumerable<SAT.MVC.DATA.EF.StudentStatus>
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Student Status";
 }
 
-<h2>Index</h2>
+<h2><br />@ViewBag.Title</h2>
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -20,23 +20,24 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.StatusName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Description)
-        </td>
-        <td>
-            @if (User.IsInRole("Admin"))
-            {
-            @Html.ActionLink("Edit", "Edit", new { id = item.SSID }) 
-            @Html.ActionLink("Details", "Details", new { id = item.SSID }) 
-            @Html.ActionLink("Delete", "Delete", new { id = item.SSID })
-            }
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.StatusName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Description)
+            </td>
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit", "Edit", new { id = item.SSID })
+                    @Html.ActionLink("Details", "Details", new { id = item.SSID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.SSID })
+                }
+            </td>
+        </tr>
+    }
 
 </table>
