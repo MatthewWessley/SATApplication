@@ -1,2 +1,24 @@
-﻿body {
+﻿#mainContent{
+    width:80%;
+    margin:auto;
+    min-height: 830px;
+
+}
+
+#headerRight{
+    margin-left: 40%;
+}
+
+#headerLeft{
+    float:left;
+    width: 30%;
+}
+
+#viewContent{
+
+}
+
+.studentImage{
+    width:400px;
+    height:400px;
 }

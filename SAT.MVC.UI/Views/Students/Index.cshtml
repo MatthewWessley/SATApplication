@@ -2,128 +2,81 @@
 @using PagedList.Mvc;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Students";
 }
 
-<h2>Index</h2>
+<h2><br />@ViewBag.Title</h2>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
+<p class="btn button" >
+    @Html.ActionLink("New Student", "Create")
 </p>
 
-    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
-
-    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))
 
 
-    <table class="table">
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Major)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().City)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().State)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().StudentPhone)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FirstOrDefault().StudentStatus.StatusName)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().DOB)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Major)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().HasScholarship)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Email)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Address)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().City)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().State)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().Zip)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().EmergencyContact)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().EmergencyPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().StudentPhone)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().StudentImage)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstOrDefault().StudentStatus.StatusName)
-            </th>
-            <th></th>
+            <td>
+                @Html.ActionLink(item.FullName, "Details", new { id = item.StudentID })
+                @*@Html.DisplayFor(modelItem => item.FullName)*@
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Major)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentPhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StudentStatus.StatusName)
+            </td>
+            <td>
+                @if (User.IsInRole("Admin"))
+                {
+                    @Html.ActionLink("Edit | ", "Edit", new { id = item.StudentID })
+                    @Html.ActionLink("Delete", "Delete", new { id = item.StudentID })
+                }
+
+            </td>
         </tr>
+    }
 
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.FirstName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.LastName)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DOB)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Major)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.HasScholarship)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Email)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Address)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.City)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.State)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Zip)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmergencyContact)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.EmergencyPhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentPhone)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentImage)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.StudentStatus.StatusName)
-                </td>
-                <td>
-                    @if (User.IsInRole("Admin"))
-                    {
-                        @Html.ActionLink("Edit", "Edit", new { id = item.StudentID })
-                        @Html.ActionLink("Delete", "Delete", new { id = item.StudentID })
-                    }
+</table>
 
-                    @Html.ActionLink("Details", "Details", new { id = item.StudentID })
-                </td>
-            </tr>
-        }
-
-    </table>
+    Page @(Model.PageCount < Model.PageNumber ? 0 : Model.PageNumber) of @Model.PageCount
+    @Html.PagedListPager(Model, page => Url.Action("Index", new { page, currentFilter = ViewBag.CurrentFilter }))

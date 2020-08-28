@@ -25,7 +25,7 @@ namespace SAT.MVC.UI.Controllers
 
         public ViewResult Index(int page = 1)
         {
-            int pageSize = 3;
+            int pageSize = 5;
 
             var stu = db.Students.OrderBy(x => x.LastName).ToList();
             return View(stu.ToPagedList(page, pageSize));

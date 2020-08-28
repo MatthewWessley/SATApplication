@@ -2,16 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Educational Institution</title>
+    <title>Munster University</title>
     <meta http-equiv="content-type" content="text/html; charset=utf-8" />
     <meta name="description" content="" />
     <meta name="keywords" content="" />
+    <!--Scripts-->
     <script src="~/Content/js/html5shiv.js"></script>
     <script src="~/Content/js/jquery.min.js"></script>
     <script src="~/Content/js/skel.min.js"></script>
     <script src="~/Content/js/skel-layers.min.js"></script>
     <script src="~/Content/js/init.js"></script>
-
+    <!--Style Sheets-->
     <link rel="stylesheet" href="~/Content/css/skel.css" />
     <link rel="stylesheet" href="~/Content/css/style.css" />
     <link rel="stylesheet" href="~/Content/css/style-xlarge.css" />
@@ -19,108 +20,58 @@
 
     <link href="~/Content/PagedList.css" rel="stylesheet" />
 </head>
-<body class="landing">
-    <!-- Header -->
-    <header id="header">
-        <h1><a href="index.html">Transit</a></h1>
-        <nav id="nav">
-            <ul>
-                <li><a href="@Url.Action("Index","Home")">Home</a></li>
-                <li><a href="@Url.Action("Index","Students")">Students</a></li>
-                <li><a href="@Url.Action("Index","Enrollment")">Enrollment</a></li>
-                <li><a href="@Url.Action("Index","ScheduledClasses")">Course Schedule</a></li>
-                <li><a href="@Url.Action("Contact","Home")">Contact</a></li>
-                @if (User.IsInRole("Admin"))
-                {
-                    <li><a href="@Url.Action("Index","Courses")">Courses</a></li>
-                    <li>@Html.ActionLink("Roles", "Index", "RolesAdmin")</li>
-                    <li>@Html.ActionLink("Users", "Index", "UsersAdmin")</li>
-                }
-                @*<li><a href="#" class="button special">Sign Up</a></li>*@
-                <li> @Html.Partial("_LoginPartial")</li>
-            </ul>
-        </nav>
-    </header>
-    <!-- Banner -->
-    <section id="banner">
-        <h2>Hi. This is {Name}.</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
-        <ul class="actions">
-            <li>
-                <a href="#" class="button big">Lorem ipsum dolor</a>
-            </li>
-        </ul>
-    </section>
 
-    @RenderBody()
-
+    <body class="landing">
+        <!-- Header -->
+        <header id="header">
+            <h1><a href="@Url.Action("Index","Home")">Munster</a></h1>
+            <nav id="nav">
+                <ul>
+                    <li><a href="@Url.Action("Index","Home")">Home</a></li>
+                    @if (User.IsInRole("Admin") || User.IsInRole("Scheduling"))
+                    {
+                        <li><a href="@Url.Action("Index","Students")">Students</a></li>
+                        <li><a href="@Url.Action("Index","Enrollments")">Enrollment</a></li>
+                        <li><a href="@Url.Action("Index","ScheduledClasses")">Course Schedule</a></li>
+                    }
+                    <li><a href="@Url.Action("Connect","Home")">Contact</a></li>
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a href="@Url.Action("Index","Courses")">Courses</a></li>
+                        <li>@Html.ActionLink("Roles", "Index", "RolesAdmin")</li>
+                        <li>@Html.ActionLink("Users", "Index", "UsersAdmin")</li>
+                        <li>@Html.ActionLink("Register", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+                    }
+                    <li> @Html.Partial("_LoginPartial")</li>
+                </ul>
+            </nav>
+        </header>
+        <!-- Banner -->
+        <section id="banner">
+        </section>
+        <div id="mainContent">
+            @RenderBody()
+        </div>
     <!-- Footer -->
     <footer id="footer">
-        <div class="container">
-            <section class="links">
-                <div class="row">
-                    <section class="3u 6u(medium) 12u$(small)">
-                        <h3>Lorem ipsum dolor</h3>
-                        <ul class="unstyled">
-                            <li><a href="@Url.Action("Index","Home")">Lorem ipsum dolor sit</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Nesciunt itaque, alias possimus</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Optio rerum beatae autem</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Nostrum nemo dolorum facilis</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Quo fugit dolor totam</a></li>
-                        </ul>
-                    </section>
-                    <section class="3u 6u$(medium) 12u$(small)">
-                        <h3>Culpa quia, nesciunt</h3>
-                        <ul class="unstyled">
-                            <li><a href="@Url.Action("Index","Home")">Lorem ipsum dolor sit</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Reiciendis dicta laboriosam enim</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Corporis, non aut rerum</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Laboriosam nulla voluptas, harum</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Facere eligendi, inventore dolor</a></li>
-                        </ul>
-                    </section>
-                    <section class="3u 6u(medium) 12u$(small)">
-                        <h3>Neque, dolore, facere</h3>
-                        <ul class="unstyled">
-                            <li><a href="@Url.Action("Index","Home")">Lorem ipsum dolor sit</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Distinctio, inventore quidem nesciunt</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Explicabo inventore itaque autem</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Aperiam harum, sint quibusdam</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Labore excepturi assumenda</a></li>
-                        </ul>
-                    </section>
-                    <section class="3u$ 6u$(medium) 12u$(small)">
-                        <h3>Illum, tempori, saepe</h3>
-                        <ul class="unstyled">
-                            <li><a href="@Url.Action("Index","Home")">Lorem ipsum dolor sit</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Recusandae, culpa necessita nam</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Cupiditate, debitis adipisci blandi</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Tempore nam, enim quia</a></li>
-                            <li><a href="@Url.Action("Index","Home")">Explicabo molestiae dolor labore</a></li>
-                        </ul>
-                    </section>
-                </div>
-            </section>
+        <div class="container">            
             <div class="row">
                 <div class="8u 12u$(medium)">
                     <ul class="copyright">
-                        <li>&copy; Educational Institution. All rights reserved.</li>
+                        <li>&copy; Munster University. All rights reserved, 2020.</li>
                         <li>Design: <a href="http://templated.co">TEMPLATED</a></li>
                     </ul>
                 </div>
                 <div class="4u$ 12u$(medium)">
                     <ul class="icons">
                         <li>
-                            <a class="icon rounded fa-facebook"><span class="label">Facebook</span></a>
+                            <a class="icon rounded fa-facebook" href="#"><span class="label">Facebook</span></a>
                         </li>
                         <li>
-                            <a class="icon rounded fa-twitter"><span class="label">Twitter</span></a>
+                            <a class="icon rounded fa-twitter" href="#"><span class="label">Twitter</span></a>
                         </li>
                         <li>
-                            <a class="icon rounded fa-google-plus"><span class="label">Google+</span></a>
-                        </li>
-                        <li>
-                            <a class="icon rounded fa-linkedin"><span class="label">LinkedIn</span></a>
+                            <a class="icon rounded fa-linkedin" href="#"><span class="label">LinkedIn</span></a>
                         </li>
                     </ul>
                 </div>
